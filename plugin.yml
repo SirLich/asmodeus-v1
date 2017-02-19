@@ -4,3 +4,6 @@ main: sirlich.core.AsmodeusRPG
 author: SirLich
 description: RPG plugin testing
 commands:
+  sword:
+    description: Nothing here
+    usage: /kit
