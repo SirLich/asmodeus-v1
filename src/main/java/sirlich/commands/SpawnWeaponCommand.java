@@ -4,18 +4,25 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import sirlich.weapons.SwordWeapon;
+import sirlich.weapons.WeaponUtil;
 
-public class SwordCommand implements CommandExecutor{
+public class SpawnWeaponCommand implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(sender instanceof Player){
 			Player p = (Player) sender;
-			p.getInventory().addItem(SwordWeapon.create(args[0]));
+			String name;
+			if(args.length >= 1){
+				name = args[0];
+			}
+			else{
+				name = "null";
+			}
+			p.getInventory().addItem(WeaponUtil.create(name,args[1]));
 		}
 		else{
-			System.out.println("Please us this command in-game");
+			//Handle the other form of this command
 		}
 		return false;
 	}

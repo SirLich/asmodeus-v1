@@ -1,7 +1,7 @@
 package sirlich.core;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import sirlich.commands.SwordCommand;
+import sirlich.commands.SpawnWeaponCommand;
 import sirlich.listeners.PlayerAttackListener;
 
 public class AsmodeusRPG extends JavaPlugin{
@@ -22,6 +22,6 @@ public class AsmodeusRPG extends JavaPlugin{
     	getServer().getPluginManager().registerEvents(new PlayerAttackListener(), this);
     }
     private void registerCommands(){
-    	this.getCommand("sword").setExecutor(new SwordCommand());
+    	this.getCommand("sword").setExecutor(new SpawnWeaponCommand());
     }
 }
