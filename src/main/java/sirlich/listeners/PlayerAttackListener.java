@@ -1,14 +1,16 @@
 package sirlich.listeners;
 
-import org.bukkit.Material;
+import java.util.Arrays;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+import de.tr7zw.itemnbtapi.NBTItem;
+
 public class PlayerAttackListener implements Listener{
-	
 	@EventHandler //Catches all damage, but only handles entity on entity
 	public void onEntityDamage(EntityDamageEvent e){
 		if(e instanceof EntityDamageByEntityEvent){
@@ -16,8 +18,16 @@ public class PlayerAttackListener implements Listener{
 			 
             if(event.getDamager() instanceof Player){
             	Player player = (Player) event.getDamager();
-            	if(player.getInventory().getItemInMainHand().getType().equals(Material.STICK)){
-            		e.setDamage((double)100);
+            	String[] weaponList = {"DIAMOND_SWORD","DIAMOND_AXE"};
+            	boolean isWep = Arrays.asList(weaponList).contains(player.getInventory().getItemInMainHand().getType().name());
+            	if(isWep){
+            		NBTItem item = new NBTItem(player.getInventory().getItemInMainHand());
+            		if(item.hasKey("Damage")){
+            			event.setDamage((double)item.getInteger("Damage"));
+            		}
+            		else{
+            			player.sendMessage("For the love of GOD stop using that! Its going to break the code!");
+            		}
             	}
             }
 		}

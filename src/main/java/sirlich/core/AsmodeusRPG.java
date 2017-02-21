@@ -39,7 +39,7 @@ public class AsmodeusRPG extends JavaPlugin{
      * This method registers all commands.
     **/
     private void registerCommands(){
-    	this.getCommand("sword").setExecutor(new SpawnWeaponCommand());
+    	this.getCommand("spawn").setExecutor(new SpawnWeaponCommand());
     }
     
     /**

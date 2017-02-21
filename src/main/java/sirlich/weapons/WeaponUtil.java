@@ -4,13 +4,17 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_11_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import de.tr7zw.itemnbtapi.NBTItem;
 import net.minecraft.server.v1_11_R1.NBTTagCompound;
+import net.minecraft.server.v1_11_R1.NBTTagInt;
 import net.minecraft.server.v1_11_R1.NBTTagList;
+import net.minecraft.server.v1_11_R1.NBTTagString;
 
 /**
  * Note to myself: Weapons should have:
@@ -21,13 +25,39 @@ import net.minecraft.server.v1_11_R1.NBTTagList;
  * 
 **/
 
+
 /**
  * This class is the utilities class for Weapons. It should have methods like rename, create, and other such things. 
 **/
 public class WeaponUtil {
+	
+	/**
+	 * Currently null, this method will eventualy be used to set the attack speed for weapons.
+	**/
+	@SuppressWarnings("unused")
+	private static ItemStack setAttackSpeed(ItemStack item, float speed){
+		//ItemStack item = new ItemStack(material.DIAMOND_SWORD, 1); //Creating new item.
+		net.minecraft.server.v1_11_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		NBTTagCompound compound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
+		NBTTagList modifiers = new NBTTagList();
+		NBTTagCompound attackSpeed = new NBTTagCompound();
+		attackSpeed.set("AttributeName", new NBTTagString("generic.attackSpeed"));
+		attackSpeed.set("Name", new NBTTagString("generic.attackDamage"));
+		attackSpeed.set("Amount", new NBTTagInt(20));
+		attackSpeed.set("Operation", new NBTTagInt(0));
+		attackSpeed.set("UUIDLeast", new NBTTagInt(894654));
+		attackSpeed.set("UUIDMost", new NBTTagInt(2872));
+		attackSpeed.set("Slot", new NBTTagString("mainhand"));
+		modifiers.add(attackSpeed);
+		compound.set("AttributeModifiers", modifiers);
+		nmsStack.setTag(compound);
+		item = CraftItemStack.asBukkitCopy(nmsStack);
+		return item;
+	}
 	/**
 	 * Currently null, this method should eventualy return a custom name given the tier and type. 
 	**/
+	@SuppressWarnings("unused")
 	private static String getName(String name, String type){
 		
 		return null;
@@ -49,8 +79,6 @@ public class WeaponUtil {
 		m.put("ironsword", new ItemStack(Material.IRON_SWORD));
 		m.put("ironaxe", new ItemStack(Material.IRON_AXE));
 		m.put("ironbow", new ItemStack(Material.IRON_SPADE));
-		
-		
 		
 		//Handles the return of all gold items
 		m.put("goldsword", new ItemStack(Material.GOLD_SWORD));
@@ -78,14 +106,13 @@ public class WeaponUtil {
 	public static ItemStack create(String material, String type){
         ItemStack weaponItem = getItemStack(material, type);
         ItemMeta weaponMeta = weaponItem.getItemMeta();
-        weaponMeta.setDisplayName(material + " " + type);
+        weaponMeta.setDisplayName(Color.AQUA + material + " " + type);
         weaponMeta.setLore(Arrays.asList("Line1", "Yeah... you", "BOOd3M!"));
         weaponItem.setItemMeta(weaponMeta);
-        net.minecraft.server.v1_11_R1.ItemStack weaponNMS = CraftItemStack.asNMSCopy(weaponItem);
-        NBTTagCompound compound = (weaponNMS.hasTag()) ? weaponNMS.getTag() : new NBTTagCompound();
-        NBTTagList modifiers = new NBTTagList();
-        NBTTagCompound damage = new NBTTagCompound();
-        
+        NBTItem weaponNBT = new NBTItem(weaponItem);
+        weaponNBT.setInteger("Damage", 10);
+        weaponNBT.setString("Message", "You hit me!");
+        weaponItem = weaponNBT.getItem();
         return weaponItem;
 	}
 }

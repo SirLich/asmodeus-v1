@@ -15,19 +15,17 @@ public class SpawnWeaponCommand implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(sender instanceof Player){
 			Player p = (Player) sender;
-			String name;
-			if(args.length >= 1){
-				name = args[0];
+			if(args.length >= 2){
+				p.getInventory().addItem(WeaponUtil.create(args[0],args[1]));
 			}
 			else{
-				name = "null";
+				return false;
 			}
-			p.getInventory().addItem(WeaponUtil.create(name,args[1]));
 		}
 		else{
 			//Handle the other form of this command
 		}
-		return false;
+		return true;
 	}
 
 }
