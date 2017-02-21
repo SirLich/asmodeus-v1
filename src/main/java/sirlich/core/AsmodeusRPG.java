@@ -4,24 +4,48 @@ import org.bukkit.plugin.java.JavaPlugin;
 import sirlich.commands.SpawnWeaponCommand;
 import sirlich.listeners.PlayerAttackListener;
 
+/**
+ * This class is the "Heart of the beast". This is the main class that extends java plugin. 
+**/
 public class AsmodeusRPG extends JavaPlugin{
-	// Fired when plugin is first enabled
+	private static AsmodeusRPG instance; //instance of the plugin
+	
+	/**
+	 * This method is the basic built-in onEnable method. It will run once when the plugin is loaded.
+	**/
     @Override
     public void onEnable() {
+    	instance = this;
     	registerListeners();
     	registerCommands();
     }
     
-    // Fired when plugin is disabled
+    /**
+	 * This method is the basic built-in onDisable method. It will run once when the plugin is unloaded.
+	**/
     @Override
     public void onDisable() {
-
+    	instance = null;
     }
     
+    /**
+     * This method registers all listeners. 
+    **/
     private void registerListeners(){
     	getServer().getPluginManager().registerEvents(new PlayerAttackListener(), this);
     }
+    
+    /**
+     * This method registers all commands.
+    **/
     private void registerCommands(){
     	this.getCommand("sword").setExecutor(new SpawnWeaponCommand());
+    }
+    
+    /**
+     * This method returns an instance of the main plugin for use in other .java files.
+    **/
+    public static AsmodeusRPG instance(){
+    	  return instance;
     }
 }

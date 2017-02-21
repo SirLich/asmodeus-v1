@@ -6,6 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import sirlich.weapons.WeaponUtil;
 
+/**
+ * This class is a temp-class to test out WeaponUtil.
+**/
 public class SpawnWeaponCommand implements CommandExecutor{
 
 	@Override
