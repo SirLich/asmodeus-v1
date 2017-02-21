@@ -6,4 +6,4 @@ description: RPG plugin testing
 commands:
   spawn:
     description: Spawn in custom weapons
-    usage: /spawn <material> <weapon type>
+    usage: /spawn <material> <weapon type> <attack speed float>

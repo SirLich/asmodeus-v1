@@ -4,14 +4,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_11_R1.inventory.CraftItemStack;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import de.tr7zw.itemnbtapi.NBTItem;
+import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_11_R1.NBTTagCompound;
+import net.minecraft.server.v1_11_R1.NBTTagFloat;
 import net.minecraft.server.v1_11_R1.NBTTagInt;
 import net.minecraft.server.v1_11_R1.NBTTagList;
 import net.minecraft.server.v1_11_R1.NBTTagString;
@@ -34,7 +36,6 @@ public class WeaponUtil {
 	/**
 	 * Currently null, this method will eventualy be used to set the attack speed for weapons.
 	**/
-	@SuppressWarnings("unused")
 	private static ItemStack setAttackSpeed(ItemStack item, float speed){
 		//ItemStack item = new ItemStack(material.DIAMOND_SWORD, 1); //Creating new item.
 		net.minecraft.server.v1_11_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
@@ -43,7 +44,7 @@ public class WeaponUtil {
 		NBTTagCompound attackSpeed = new NBTTagCompound();
 		attackSpeed.set("AttributeName", new NBTTagString("generic.attackSpeed"));
 		attackSpeed.set("Name", new NBTTagString("generic.attackDamage"));
-		attackSpeed.set("Amount", new NBTTagInt(20));
+		attackSpeed.set("Amount", new NBTTagFloat(speed));
 		attackSpeed.set("Operation", new NBTTagInt(0));
 		attackSpeed.set("UUIDLeast", new NBTTagInt(894654));
 		attackSpeed.set("UUIDMost", new NBTTagInt(2872));
@@ -103,16 +104,20 @@ public class WeaponUtil {
 	 * This mess right here is what creates and returns the requested weapon.
 	 * Usage: WeaponUtils.create();
 	**/
-	public static ItemStack create(String material, String type){
+	public static ItemStack create(String material, String type,float attackSpeed){
         ItemStack weaponItem = getItemStack(material, type);
         ItemMeta weaponMeta = weaponItem.getItemMeta();
-        weaponMeta.setDisplayName(Color.AQUA + material + " " + type);
-        weaponMeta.setLore(Arrays.asList("Line1", "Yeah... you", "BOOd3M!"));
+        weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        String name = ChatColor.AQUA + material + " " + type +  " of Wind!";
+        weaponMeta.setDisplayName(name);
+        weaponMeta.setLore(Arrays.asList("Some meta", "Two lines", "3 Lines!"));
         weaponItem.setItemMeta(weaponMeta);
         NBTItem weaponNBT = new NBTItem(weaponItem);
         weaponNBT.setInteger("Damage", 10);
         weaponNBT.setString("Message", "You hit me!");
         weaponItem = weaponNBT.getItem();
+        weaponItem = setAttackSpeed(weaponItem, attackSpeed);
+        
         return weaponItem;
 	}
 }
