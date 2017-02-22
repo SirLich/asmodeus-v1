@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import de.tr7zw.itemnbtapi.NBTItem;
 import net.md_5.bungee.api.ChatColor;
+import net.minecraft.server.v1_11_R1.NBTTagByte;
 import net.minecraft.server.v1_11_R1.NBTTagCompound;
 import net.minecraft.server.v1_11_R1.NBTTagFloat;
 import net.minecraft.server.v1_11_R1.NBTTagInt;
@@ -63,6 +64,7 @@ public class WeaponUtil {
 		attackSpeed.set("Slot", new NBTTagString("mainhand"));
 		modifiers.add(attackSpeed);
 		compound.set("AttributeModifiers", modifiers);
+		compound.set("Unbreakable", new NBTTagByte((byte) 1));
 		nmsStack.setTag(compound);
 		item = CraftItemStack.asBukkitCopy(nmsStack);
 		return item;
@@ -127,8 +129,8 @@ public class WeaponUtil {
             weaponItem.setItemMeta(weaponMeta);
             NBTItem weaponNBT = new NBTItem(weaponItem);
             
-            weaponNBT.setInteger("Damage", 10);
-            weaponNBT.setString("Message", "You hit me!");
+            weaponNBT.setDouble("Damage", dmg);
+            weaponNBT.setString("Message", "You hit me with " + name);
             weaponNBT.setInteger("Level", level);
             weaponItem = weaponNBT.getItem();
             weaponItem = setAttackSpeed(weaponItem, attackSpeed);
@@ -154,6 +156,13 @@ public class WeaponUtil {
  * Katana
  * Scimitar
  * 
+**/
+
+/**
+ * Maybe changing the idea for swords. New types and how to make them:
+ * 
+ * Warrhammer: super-slow recharge speed, but high dmg. 
+ * Axe: medium recharge speed, 
 **/
 
 //CreateSword(Name:Bob, Tier:Diamond, Lvl:25, AttackDmg:12, AttackSpeed:-5, recieveMessage:"Yah picked up an enchanted sword"

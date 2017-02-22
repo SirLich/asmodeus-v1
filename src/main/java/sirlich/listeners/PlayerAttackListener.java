@@ -22,9 +22,9 @@ public class PlayerAttackListener implements Listener{
             	boolean isWep = Arrays.asList(weaponList).contains(player.getInventory().getItemInMainHand().getType().name());
             	if(isWep){
             		NBTItem item = new NBTItem(player.getInventory().getItemInMainHand());
-            		if(item.hasKey("Damage") && item.hasKey("Message")){
+            		if(item.hasKey("Damage")){
             			event.setDamage((double)item.getInteger("Damage"));
-            			player.sendMessage(item.getString("Message"));
+            			player.getInventory().getItemInMainHand().setDurability((short) 500);
             		}
             		else{
             			player.sendMessage("For the love of GOD stop using that! Its going to break the code!");
