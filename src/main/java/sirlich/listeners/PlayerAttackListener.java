@@ -18,12 +18,13 @@ public class PlayerAttackListener implements Listener{
 			 
             if(event.getDamager() instanceof Player){
             	Player player = (Player) event.getDamager();
-            	String[] weaponList = {"DIAMOND_SWORD","DIAMOND_AXE"};
+            	String[] weaponList = {"DIAMOND_SWORD","DIAMOND_AXE","DIAMOND_SHOVEL"};
             	boolean isWep = Arrays.asList(weaponList).contains(player.getInventory().getItemInMainHand().getType().name());
             	if(isWep){
             		NBTItem item = new NBTItem(player.getInventory().getItemInMainHand());
-            		if(item.hasKey("Damage")){
+            		if(item.hasKey("Damage") && item.hasKey("Message")){
             			event.setDamage((double)item.getInteger("Damage"));
+            			player.sendMessage(item.getString("Message"));
             		}
             		else{
             			player.sendMessage("For the love of GOD stop using that! Its going to break the code!");

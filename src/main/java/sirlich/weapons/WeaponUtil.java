@@ -19,25 +19,37 @@ import net.minecraft.server.v1_11_R1.NBTTagList;
 import net.minecraft.server.v1_11_R1.NBTTagString;
 
 /**
- * Note to myself: Weapons should have:
- * Name
- * Tier
- * Variation (this will set the level, which is found by: tier x 10 + (Ranfom(-Variation,Variation))
- * Damage (Possibly set by the level? This could be an overridet to that possibly.
- * 
-**/
-
-
-/**
- * This class is the utilities class for Weapons. It should have methods like rename, create, and other such things. 
+ * This class was eventualy going to be filled with utils, but has sort of turned into the spawner for custom weps.
+ * Notes can be found at the bottom.
 **/
 public class WeaponUtil {
+	/**
+	 * This method creates a simple sword. It only takes in 2 params, tier, and level. 
+	 * Everything else, such as damage, is calculated from the tier and level.   
+	**/
+	public static ItemStack SimpleSword(){
+		return null;
+	}
 	
 	/**
-	 * Currently null, this method will eventualy be used to set the attack speed for weapons.
+	 * This method returns a sword. It take more params than SimpleSword. 
+	**/
+	public static ItemStack Sword(){
+		return null;
+	}
+	
+	/**
+	 * This will eventualy be used to fully custumize a sword (takes all the possible params)
+	**/
+	public static ItemStack CustomSword(String material, String type, int level, float dmg, float attackSpeed, String name){
+		return CreateWeapon(material, type, level, dmg, attackSpeed, name);
+	}
+	
+	
+	/**
+	 * This method takes and returns an ItemStack. Its purpose is to set the attak speed of that Item. 
 	**/
 	private static ItemStack setAttackSpeed(ItemStack item, float speed){
-		//ItemStack item = new ItemStack(material.DIAMOND_SWORD, 1); //Creating new item.
 		net.minecraft.server.v1_11_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound compound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
 		NBTTagList modifiers = new NBTTagList();
@@ -55,18 +67,9 @@ public class WeaponUtil {
 		item = CraftItemStack.asBukkitCopy(nmsStack);
 		return item;
 	}
+	
 	/**
-	 * Currently null, this method should eventualy return a custom name given the tier and type. 
-	**/
-	@SuppressWarnings("unused")
-	private static String getName(String name, String type){
-		
-		return null;
-		
-	}
-	/**
-	 *	This function takes string input, and returns an item stack of the correct type.
-	 *  NOTE: If the function returns a REDSTONE_BLOCK, this is a code meaning "Bad input"
+	 * This method turns a String into an ItemStack 
 	**/
 	private static ItemStack getItemStack(String type, String name){
 		Map <String, ItemStack> m = new HashMap<String, ItemStack>();
@@ -100,24 +103,57 @@ public class WeaponUtil {
 		}
 		return new ItemStack(Material.REDSTONE_BLOCK); //else clause (bad input)
 	}
+	
 	/**
-	 * This mess right here is what creates and returns the requested weapon.
-	 * Usage: WeaponUtils.create();
+	 * This is the class that is called by the public classes at the top.
+	 * Working with the other private classes, it will eventualy return an ItemStack.
 	**/
-	public static ItemStack create(String material, String type,float attackSpeed){
+	private static ItemStack CreateWeapon(String material, String type, int level, float dmg, float attackSpeed, String name){
         ItemStack weaponItem = getItemStack(material, type);
-        ItemMeta weaponMeta = weaponItem.getItemMeta();
-        weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        String name = ChatColor.AQUA + material + " " + type +  " of Wind!";
-        weaponMeta.setDisplayName(name);
-        weaponMeta.setLore(Arrays.asList("Some meta", "Two lines", "3 Lines!"));
-        weaponItem.setItemMeta(weaponMeta);
-        NBTItem weaponNBT = new NBTItem(weaponItem);
-        weaponNBT.setInteger("Damage", 10);
-        weaponNBT.setString("Message", "You hit me!");
-        weaponItem = weaponNBT.getItem();
-        weaponItem = setAttackSpeed(weaponItem, attackSpeed);
-        
+        if(weaponItem == new ItemStack(Material.REDSTONE_BLOCK)){
+        	ItemMeta weaponMeta = weaponItem.getItemMeta();
+            weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+            name = ChatColor.DARK_RED + "This block represents an error. Please use this method correctly";
+            weaponMeta.setDisplayName(name);
+        }
+        else{
+        	ItemMeta weaponMeta = weaponItem.getItemMeta();
+            weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+            name = ChatColor.AQUA + material + " " + type +  " of " + name;
+            weaponMeta.setDisplayName(name);
+            weaponMeta.setLore(Arrays.asList(ChatColor.GOLD + "Damage: " + dmg,
+            		ChatColor.GOLD + "Speed: " + attackSpeed,
+            		ChatColor.GOLD + "Level: " + level));
+            weaponItem.setItemMeta(weaponMeta);
+            NBTItem weaponNBT = new NBTItem(weaponItem);
+            
+            weaponNBT.setInteger("Damage", 10);
+            weaponNBT.setString("Message", "You hit me!");
+            weaponNBT.setInteger("Level", level);
+            weaponItem = weaponNBT.getItem();
+            weaponItem = setAttackSpeed(weaponItem, attackSpeed);
+        }
         return weaponItem;
 	}
 }
+/**
+ * Brainstorming possible params the CreateSword should get:
+ * Damage
+ * AttackSpeed
+ * Name
+ * RecieveMessage
+ * Level
+ * Tier
+ * Lore-line
+**/
+
+/**
+ * Sword names:
+ * Broadsword
+ * Cutlass
+ * Katana
+ * Scimitar
+ * 
+**/
+
+//CreateSword(Name:Bob, Tier:Diamond, Lvl:25, AttackDmg:12, AttackSpeed:-5, recieveMessage:"Yah picked up an enchanted sword"

@@ -4,7 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import sirlich.weapons.WeaponUtil;
 
 /**
  * This class is a temp-class to test out WeaponUtil.
@@ -15,8 +14,13 @@ public class SpawnWeaponCommand implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(sender instanceof Player){
 			Player p = (Player) sender;
-			if(args.length >= 3){
-				p.getInventory().addItem(WeaponUtil.create(args[0],args[1],Float.parseFloat(args[2])));
+			if(args.length >= 6){
+				p.getInventory().addItem(sirlich.weapons.WeaponUtil.CustomSword(args[0],
+						args[1],
+						Integer.parseInt(args[2]),
+						Float.parseFloat(args[3]),
+						Float.parseFloat(args[4]),
+						args[5]));
 			}
 			else{
 				return false;
