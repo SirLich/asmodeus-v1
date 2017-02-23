@@ -7,7 +7,9 @@ import sirlich.listeners.PlayerAttackListener;
 import sirlich.listeners.CancelSwitchHandEvent;
 
 /**
- * This class is the "Heart of the beast". This is the main class that extends java plugin. 
+ * This class is the "Heart of the beast". This is the main class that extends java plugin.
+ * As the core, this plugin will handle things like the registration of events, and other
+ * such things. 
 **/
 public class AsmodeusRPG extends JavaPlugin{
 	private static AsmodeusRPG instance; //instance of the plugin

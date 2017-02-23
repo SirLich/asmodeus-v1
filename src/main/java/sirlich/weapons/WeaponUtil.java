@@ -20,7 +20,7 @@ import net.minecraft.server.v1_11_R1.NBTTagList;
 import net.minecraft.server.v1_11_R1.NBTTagString;
 
 /**
- * This class was eventualy going to be filled with utils, but has sort of turned into the spawner for custom weps.
+ * This class was initialy going to be filled with utils, but has sort of turned into the spawner for custom weps.
  * Notes can be found at the bottom.
 **/
 public class WeaponUtil {
@@ -42,8 +42,8 @@ public class WeaponUtil {
 	/**
 	 * This will eventualy be used to fully custumize a sword (takes all the possible params)
 	**/
-	public static ItemStack CustomSword(String material, String type, int level, float dmg, float attackSpeed, String name){
-		return CreateWeapon(material, type, level, dmg, attackSpeed, name);
+	public static ItemStack CustomSword(String material, String type, int level, float dmg, float attackSpeed, String name, short itemDmg){
+		return CreateWeapon(material, type, level, dmg, attackSpeed, name, itemDmg);
 	}
 	
 	
@@ -73,7 +73,7 @@ public class WeaponUtil {
 	/**
 	 * This method turns a String into an ItemStack 
 	**/
-	private static ItemStack getItemStack(String type, String name){
+	private static ItemStack getItemStack(String type, String name, short itemDmg){
 		Map <String, ItemStack> m = new HashMap<String, ItemStack>();
 		String s = type.toLowerCase() + name.toLowerCase();
 		//Handles the return of all wooden items
@@ -83,7 +83,7 @@ public class WeaponUtil {
 		
 		//Handles the return of all iron items
 		m.put("ironsword", new ItemStack(Material.IRON_SWORD));
-		m.put("ironaxe", new ItemStack(Material.IRON_AXE));
+		m.put("ironaxe", new ItemStack(Material.IRON_AXE,1,itemDmg));
 		m.put("ironbow", new ItemStack(Material.IRON_SPADE));
 		
 		//Handles the return of all gold items
@@ -110,8 +110,8 @@ public class WeaponUtil {
 	 * This is the class that is called by the public classes at the top.
 	 * Working with the other private classes, it will eventualy return an ItemStack.
 	**/
-	private static ItemStack CreateWeapon(String material, String type, int level, float dmg, float attackSpeed, String name){
-        ItemStack weaponItem = getItemStack(material, type);
+	private static ItemStack CreateWeapon(String material, String type, int level, float dmg, float attackSpeed, String name, short itemDmg){
+        ItemStack weaponItem = getItemStack(material, type, itemDmg);
         if(weaponItem == new ItemStack(Material.REDSTONE_BLOCK)){
         	ItemMeta weaponMeta = weaponItem.getItemMeta();
             weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -119,21 +119,25 @@ public class WeaponUtil {
             weaponMeta.setDisplayName(name);
         }
         else{
-        	ItemMeta weaponMeta = weaponItem.getItemMeta();
+        	//NBT
+            NBTItem weaponNBT = new NBTItem(weaponItem);
+            weaponNBT.setDouble("Damage", dmg);
+            weaponNBT.setString("Message", "You hit me with " + name);
+            weaponNBT.setInteger("Level", level);
+            weaponItem = weaponNBT.getItem();
+            weaponItem = setAttackSpeed(weaponItem, attackSpeed);
+            
+            //META
+            ItemMeta weaponMeta = weaponItem.getItemMeta();
+            weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
             weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             name = ChatColor.AQUA + material + " " + type +  " of " + name;
             weaponMeta.setDisplayName(name);
             weaponMeta.setLore(Arrays.asList(ChatColor.GOLD + "Damage: " + dmg,
             		ChatColor.GOLD + "Speed: " + attackSpeed,
             		ChatColor.GOLD + "Level: " + level));
-            weaponItem.setItemMeta(weaponMeta);
-            NBTItem weaponNBT = new NBTItem(weaponItem);
             
-            weaponNBT.setDouble("Damage", dmg);
-            weaponNBT.setString("Message", "You hit me with " + name);
-            weaponNBT.setInteger("Level", level);
-            weaponItem = weaponNBT.getItem();
-            weaponItem = setAttackSpeed(weaponItem, attackSpeed);
+            weaponItem.setItemMeta(weaponMeta);
         }
         return weaponItem;
 	}
@@ -159,10 +163,13 @@ public class WeaponUtil {
 **/
 
 /**
- * Maybe changing the idea for swords. New types and how to make them:
+ * Sword moves:
+ * Set fire tick
+ * Set poison tick 
+ * Turn invisi and set glow, steal some life
+ * Sweep (instant sword recharge)
  * 
- * Warrhammer: super-slow recharge speed, but high dmg. 
- * Axe: medium recharge speed, 
+ * 
 **/
 
 //CreateSword(Name:Bob, Tier:Diamond, Lvl:25, AttackDmg:12, AttackSpeed:-5, recieveMessage:"Yah picked up an enchanted sword"

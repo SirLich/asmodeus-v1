@@ -39,7 +39,6 @@ public class HandleRPGInventory implements Listener{
 	    if(event.getAchievement().equals(Achievement.OPEN_INVENTORY)){
 	    	Player p = (Player) event.getPlayer();
 	        event.setCancelled(true);
-	        p.sendMessage("Success!");
 	        p.getOpenInventory().setItem(1, new ItemStack(Material.NETHER_STAR));
 	        p.getOpenInventory().setItem(2, new ItemStack(Material.NETHER_STAR));
 	        p.getOpenInventory().setItem(3, new ItemStack(Material.NETHER_STAR));
@@ -65,8 +64,11 @@ public class HandleRPGInventory implements Listener{
 	 * from messing with the RPG inventory.
 	**/
 	@EventHandler
-	public void OnInventoryInteractEvent(InventoryClickEvent event){
-		
+	public void onInventoryClick(InventoryClickEvent event) {
+		ItemStack clicked = event.getCurrentItem();
+		if(clicked.getType() == Material.NETHER_STAR){ //add other special item-cases eventualy
+			event.setCancelled(true);
+		}
 	}
 	
 	

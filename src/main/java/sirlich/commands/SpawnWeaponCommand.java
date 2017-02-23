@@ -20,7 +20,8 @@ public class SpawnWeaponCommand implements CommandExecutor{
 						Integer.parseInt(args[2]),
 						Float.parseFloat(args[3]),
 						Float.parseFloat(args[4]),
-						args[5]));
+						args[5],
+						Short.parseShort(args[6])));
 			}
 			else{
 				return false;
