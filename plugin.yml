@@ -7,3 +7,6 @@ commands:
   spawn:
     description: Spawn in custom weapons
     usage: /spawn <material> <type> <level> <damage> <attack speed> <name> <Dura>
+  temp:
+    description: Nothin here
+    usage: /temp

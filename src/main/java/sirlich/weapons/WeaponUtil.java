@@ -76,7 +76,7 @@ public class WeaponUtil {
 	private static ItemStack getItemStack(String type, String name){
 		Map <String, ItemStack> m = new HashMap<String, ItemStack>();
 		String s = type.toLowerCase() + name.toLowerCase();
-		short itemDmg = 0;
+		short itemDmg = 1;
 		//Handles the return of all wooden items
 		m.put("woodsword", new ItemStack(Material.WOOD_SWORD));
 		m.put("woodaxe", new ItemStack(Material.WOOD_AXE));

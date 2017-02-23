@@ -60,12 +60,15 @@ public class PlayerAttackListener implements Listener{
             		//handle weps getting damaged.
             		item.setInteger("Durability", item.getInteger("Durability") - 1);
             		player.sendMessage("Durability set to " + item.getInteger("Durability"));
+            		
+            		
             		player.getInventory().setItemInMainHand(item.getItem());
+            		
             		if(item.getInteger("Durability") < 0){
                 		item.setInteger("Durability", item.getInteger("MaxDurability"));
                 		ItemStack item2 = item.getItem();
-                		item2.setDurability((short) (player.getInventory().getItemInMainHand().getDurability() + 1));
-                		player.sendMessage("Dure set to: " + item.getInteger("MaxDurability"));
+                		item2.setDurability((short) ((short) item2.getDurability() + 1));
+                		player.sendMessage("Dure set to: " + item2.getDurability());
                 		player.getInventory().setItemInMainHand(item2);
             		}
             	}
