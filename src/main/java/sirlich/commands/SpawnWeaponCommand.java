@@ -21,7 +21,7 @@ public class SpawnWeaponCommand implements CommandExecutor{
 						Float.parseFloat(args[3]),
 						Float.parseFloat(args[4]),
 						args[5],
-						Short.parseShort(args[6])));
+						Integer.parseInt(args[6])));
 			}
 			else{
 				return false;

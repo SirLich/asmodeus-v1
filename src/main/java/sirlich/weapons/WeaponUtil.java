@@ -42,8 +42,8 @@ public class WeaponUtil {
 	/**
 	 * This will eventualy be used to fully custumize a sword (takes all the possible params)
 	**/
-	public static ItemStack CustomSword(String material, String type, int level, float dmg, float attackSpeed, String name, short itemDmg){
-		return CreateWeapon(material, type, level, dmg, attackSpeed, name, itemDmg);
+	public static ItemStack CustomSword(String material, String type, int level, float dmg, float attackSpeed, String name, int durability){
+		return CreateWeapon(material, type, level, dmg, attackSpeed, name, durability);
 	}
 	
 	
@@ -73,9 +73,10 @@ public class WeaponUtil {
 	/**
 	 * This method turns a String into an ItemStack 
 	**/
-	private static ItemStack getItemStack(String type, String name, short itemDmg){
+	private static ItemStack getItemStack(String type, String name){
 		Map <String, ItemStack> m = new HashMap<String, ItemStack>();
 		String s = type.toLowerCase() + name.toLowerCase();
+		short itemDmg = 0;
 		//Handles the return of all wooden items
 		m.put("woodsword", new ItemStack(Material.WOOD_SWORD));
 		m.put("woodaxe", new ItemStack(Material.WOOD_AXE));
@@ -110,35 +111,28 @@ public class WeaponUtil {
 	 * This is the class that is called by the public classes at the top.
 	 * Working with the other private classes, it will eventualy return an ItemStack.
 	**/
-	private static ItemStack CreateWeapon(String material, String type, int level, float dmg, float attackSpeed, String name, short itemDmg){
-        ItemStack weaponItem = getItemStack(material, type, itemDmg);
-        if(weaponItem == new ItemStack(Material.REDSTONE_BLOCK)){
-        	ItemMeta weaponMeta = weaponItem.getItemMeta();
-            weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-            name = ChatColor.DARK_RED + "This block represents an error. Please use this method correctly";
-            weaponMeta.setDisplayName(name);
-        }
-        else{
-        	//NBT
-            NBTItem weaponNBT = new NBTItem(weaponItem);
-            weaponNBT.setDouble("Damage", dmg);
-            weaponNBT.setString("Message", "You hit me with " + name);
-            weaponNBT.setInteger("Level", level);
-            weaponItem = weaponNBT.getItem();
-            weaponItem = setAttackSpeed(weaponItem, attackSpeed);
-            
-            //META
-            ItemMeta weaponMeta = weaponItem.getItemMeta();
-            weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-            weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-            name = ChatColor.AQUA + material + " " + type +  " of " + name;
-            weaponMeta.setDisplayName(name);
-            weaponMeta.setLore(Arrays.asList(ChatColor.GOLD + "Damage: " + dmg,
-            		ChatColor.GOLD + "Speed: " + attackSpeed,
-            		ChatColor.GOLD + "Level: " + level));
-            
-            weaponItem.setItemMeta(weaponMeta);
-        }
+	private static ItemStack CreateWeapon(String material, String type, int level, float dmg, float attackSpeed, String name, int durability){
+        ItemStack weaponItem = getItemStack(material, type);
+    	//NBT
+        NBTItem weaponNBT = new NBTItem(weaponItem);
+        weaponNBT.setDouble("Damage", dmg);
+        weaponNBT.setInteger("Level", level); 
+        weaponNBT.setInteger("MaxDurability", durability);
+        weaponNBT.setInteger("Durability", durability);
+        weaponItem = weaponNBT.getItem();
+        weaponItem = setAttackSpeed(weaponItem, attackSpeed);
+        
+        //META
+        ItemMeta weaponMeta = weaponItem.getItemMeta();
+        weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        weaponMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        name = ChatColor.AQUA + material + " " + type +  " of " + name;
+        weaponMeta.setDisplayName(name);
+        weaponMeta.setLore(Arrays.asList(ChatColor.GOLD + "Damage: " + dmg,
+        		ChatColor.GOLD + "Speed: " + attackSpeed,
+        		ChatColor.GOLD + "Level: " + level));
+        
+        weaponItem.setItemMeta(weaponMeta);
         return weaponItem;
 	}
 }
