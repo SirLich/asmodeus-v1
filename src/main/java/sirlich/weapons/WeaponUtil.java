@@ -119,6 +119,7 @@ public class WeaponUtil {
         weaponNBT.setInteger("Level", level); 
         weaponNBT.setInteger("MaxDurability", durability);
         weaponNBT.setInteger("Durability", durability);
+        weaponNBT.setBoolean("broken", false);
         weaponItem = weaponNBT.getItem();
         weaponItem = setAttackSpeed(weaponItem, attackSpeed);
         
