@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.tr7zw.itemnbtapi.NBTItem;
+import net.md_5.bungee.api.ChatColor;
 
 /**
  * This somewhat temp Listener handles the event where a player hits a mob.
@@ -40,36 +41,45 @@ public class PlayerAttackListener implements Listener{
             	/**
             	 * Check if the item is a Weapon. 
             	**/
-            	if(item.hasKey("Damage")){
-            		
-            		//sets damage -> This is the RAW damage. It sets the damage. Ignoring armour... potions... sword swing.
-            		//This is good. This means we can implement our own damage system.
-            		event.setDamage((double)item.getInteger("Damage"));
-            		
-            		//Code that "Ghost weps" should have. Sets entity to invisi and outlines them for 0.1 seconds.
-            		e.getEntity().setGlowing(true);
-            		final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
-            		Runnable task = new Runnable() {
-            	        public void run() {
-            	            e.getEntity().setGlowing(false);
-            	        }
-            	    };
-            	    worker.schedule(task, 200, TimeUnit.MILLISECONDS);  
-            		((LivingEntity) e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5, 1));
-            		
-            		//handle weps getting damaged.
-            		item.setInteger("Durability", item.getInteger("Durability") - 1);
-            		player.sendMessage("Durability set to " + item.getInteger("Durability"));
-            		
-            		
-            		player.getInventory().setItemInMainHand(item.getItem());
-            		
-            		if(item.getInteger("Durability") < 0){
-                		item.setInteger("Durability", item.getInteger("MaxDurability"));
-                		ItemStack item2 = item.getItem();
-                		item2.setDurability((short) ((short) item2.getDurability() + 1));
-                		player.sendMessage("Dure set to: " + item2.getDurability());
-                		player.getInventory().setItemInMainHand(item2);
+            	if(item.hasKey("damage")){
+            		if(!item.getBoolean("broken")){
+	            		//sets damage -> This is the RAW damage. It sets the damage. Ignoring armour... potions... sword swing.
+	            		//This is good. This means we can implement our own damage system.
+	            		event.setDamage((double)item.getInteger("damage"));
+	            		
+	            		//Code that "Ghost weps" should have. Sets entity to invisi and outlines them for 0.1 seconds.
+	            		e.getEntity().setGlowing(true);
+	            		final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
+	            		Runnable task = new Runnable() {
+	            	        public void run() {
+	            	            e.getEntity().setGlowing(false);
+	            	        }
+	            	    };
+	            	    worker.schedule(task, 200, TimeUnit.MILLISECONDS);  
+	            		((LivingEntity) e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5, 1));
+	            		
+	            		//handle weps getting damaged.
+	            		item.setInteger("durability", item.getInteger("durability") - 1);
+	            		player.sendMessage("durability set to " + item.getInteger("durability"));
+	            		
+	            		
+	            		player.getInventory().setItemInMainHand(item.getItem());
+	            		
+	            		if(item.getInteger("durability") < 0){
+	                		item.setInteger("durability", item.getInteger("maxDurability"));
+	                		ItemStack item2 = item.getItem();
+	                		item2.setDurability((short) ((short) item2.getDurability() + 1));
+	                		player.sendMessage("Dure set to: " + item2.getDurability());
+	                		if(item2.getDurability() > 5){
+		            			item.setBoolean("broken", true);
+		            			item2 = item.getItem();
+		            		}
+	                		player.getInventory().setItemInMainHand(item2);
+	            		}
+	            	}
+            		else{
+            			event.setCancelled(true);
+            			player.sendMessage(ChatColor.RED + "That weapon is broken!");
             		}
             	}
             }

@@ -2,7 +2,6 @@ package sirlich.core;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
-import sirlich.commands.TempCmd;
 import sirlich.listeners.HandleRPGInventory;
 import sirlich.listeners.PlayerAttackListener;
 import sirlich.listeners.CancelSwitchHandEvent;
@@ -47,7 +46,6 @@ public class AsmodeusRPG extends JavaPlugin{
     **/
     private void registerCommands(){
     	this.getCommand("spawn").setExecutor(new SpawnWeaponCommand());
-    	this.getCommand("temp").setExecutor(new TempCmd());
     }
     
     /**

@@ -24,7 +24,11 @@ import net.minecraft.server.v1_11_R1.NBTTagString;
  * enless methods I use a ItemStack extension. I failed :/
 **/
 public class CustomWeapon{	
-	public ItemStack createWeapon(){
+	/**
+	 * This method is one of many ways of calling createWeapon.
+	 * CreateWeapon
+	**/
+	public static ItemStack createWeapon(){
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
 		int level = 100;
 		String name = ChatColor.AQUA + "Classic wand";
@@ -33,9 +37,9 @@ public class CustomWeapon{
 		int weaponDamage = setDmgValue("classic_wand");
 		int weaponDurability = (int) level/10;
 		boolean broken = false;
-		return createWeapon(item, name, level, attackDamage, attackSpeed, weaponDurability, weaponDamage, broken);
+		return makeWeapon(item, name, level, attackDamage, attackSpeed, weaponDurability, weaponDamage, broken);
 	}
-	public ItemStack createWeapon(String type, int level){
+	public static ItemStack createWeapon(String type, int level){
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
 		String name = setName(type);
 		float attackDamage = level/2;
@@ -43,16 +47,16 @@ public class CustomWeapon{
 		int weaponDamage = setDmgValue(type);
 		int weaponDurability = (int) level/10;
 		boolean broken = false;
-		return createWeapon(item, name, level, attackDamage, attackSpeed, weaponDurability, weaponDamage, broken);
+		return makeWeapon(item, name, level, attackDamage, attackSpeed, weaponDurability, weaponDamage, broken);
 	}
 	
-	private int setDmgValue(String name){
+	public static int setDmgValue(String name){
 		Map <String, Integer> m = new HashMap<String, Integer>();
 		m.put("classic_wand", 1);
 		return m.get(name);	
 	}
 	
-	private String setName(String name){
+	private static String setName(String name){
 		Map <String, String> m = new HashMap<String, String>();
 		m.put("classic_wand", "Classic wand");
 		return m.get(name);	
@@ -61,7 +65,7 @@ public class CustomWeapon{
 	/**
 	 * The "Guts". This gets called from the constructors.
 	**/
-	private ItemStack createWeapon(ItemStack item, 
+	private static ItemStack makeWeapon(ItemStack item, 
 			String name, 
 			int level,
 			float attackDamage, 
@@ -93,7 +97,7 @@ public class CustomWeapon{
         return item;
 	}
 	
-	private ItemStack setExtraNBT(ItemStack item, float speed){
+	private static ItemStack setExtraNBT(ItemStack item, float speed){
 		net.minecraft.server.v1_11_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		NBTTagCompound compound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
 		NBTTagList modifiers = new NBTTagList();
