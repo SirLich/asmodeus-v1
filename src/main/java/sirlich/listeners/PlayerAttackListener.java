@@ -4,6 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,7 +31,12 @@ public class PlayerAttackListener implements Listener{
 	public void onEntityDamage(EntityDamageEvent e){
 		if(e instanceof EntityDamageByEntityEvent){
 			EntityDamageByEntityEvent event = (EntityDamageByEntityEvent) e;
-			
+			if(e.getEntity() instanceof Player){
+				Player p = (Player) event.getEntity();
+				if(p.getHealth() < 10){
+					p.getInventory().setHelmet(new ItemStack(Material.PUMPKIN));
+				}
+			}
 			/**
 			 * All code should go in here. This makes sure the damage event stemmed from a player.
 			**/
