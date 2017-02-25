@@ -38,5 +38,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/home/liam/Jars/Item-NBT-API.jar"/>
+	<classpathentry kind="lib" path="/home/liam/Downloads/mysql-connector-java-5.0.8.zip"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
