@@ -1,4 +1,5 @@
 package sirlich.core;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
@@ -46,6 +47,7 @@ public class AsmodeusRPG extends JavaPlugin{
     **/
     private void registerCommands(){
     	this.getCommand("spawn").setExecutor(new SpawnWeaponCommand());
+    	this.getCommand("spawnMob").setExecutor(new SpawnWeaponCommand());
     }
     
     /**
@@ -54,4 +56,5 @@ public class AsmodeusRPG extends JavaPlugin{
     public static AsmodeusRPG instance(){
     	  return instance;
     }
+    
 }
