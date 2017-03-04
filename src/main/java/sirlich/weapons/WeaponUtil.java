@@ -20,6 +20,8 @@ import net.minecraft.server.v1_11_R1.NBTTagList;
 import net.minecraft.server.v1_11_R1.NBTTagString;
 
 /**
+ * NOTE: This class is no longer being developed. Please refer to CustomWeapon
+ * 
  * This class was initialy going to be filled with utils, but has sort of turned into the spawner for custom weps.
  * Notes can be found at the bottom.
 **/

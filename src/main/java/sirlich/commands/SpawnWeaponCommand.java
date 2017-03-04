@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import sirlich.weapons.CustomWeapon;
 
 /**
- * This class is a temp-class to test out WeaponUtil.
+ * This class is a temp-class to test out weapons.
 **/
 public class SpawnWeaponCommand implements CommandExecutor{
 

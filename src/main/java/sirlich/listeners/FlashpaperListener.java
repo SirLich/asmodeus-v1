@@ -9,6 +9,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import sirlich.flashpaper.LeapFlashpaper;
 
+/**
+ * Simple listener to prove that our flashpaper classes are working.
+**/
 public class FlashpaperListener implements Listener{
 	@EventHandler
 	public void FlashpaperEvent(PlayerInteractEvent event){

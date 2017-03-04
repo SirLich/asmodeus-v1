@@ -15,6 +15,8 @@ import org.bukkit.inventory.ItemStack;
  * This class handles all sorts of inventory things.
  * I plan on using the players 2x2 crafting slot as a GUI,
  * so among other things this Listener handles that. 
+ * 
+ * NOTE: Currently throwing an error when clicked outside of the inventory!
 **/
 public class HandleRPGInventory implements Listener{
 	

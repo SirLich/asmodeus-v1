@@ -3,6 +3,9 @@ package sirlich.flashpaper;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+/**
+ * Test flashpaper. This launches the players by Vector(1,1,1)
+**/
 public class LeapFlashpaper implements Flashpaper{
 	Player p;
 	public LeapFlashpaper(Player player) {
