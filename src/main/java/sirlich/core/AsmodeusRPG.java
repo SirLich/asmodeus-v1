@@ -6,6 +6,7 @@ import sirlich.commands.SpawnWeaponCommand;
 import sirlich.listeners.HandleRPGInventory;
 import sirlich.listeners.PlayerAttackListener;
 import sirlich.listeners.CancelSwitchHandEvent;
+import sirlich.listeners.CancelExpPickupListener;
 import sirlich.listeners.FlashpaperListener;
 
 /**
@@ -38,11 +39,12 @@ public class AsmodeusRPG extends JavaPlugin{
      * This method registers all listeners. 
     **/
     private void registerListeners(){
+    	
     	getServer().getPluginManager().registerEvents(new PlayerAttackListener(), this);
     	getServer().getPluginManager().registerEvents(new HandleRPGInventory(), this);
     	getServer().getPluginManager().registerEvents(new CancelSwitchHandEvent(), this);
     	getServer().getPluginManager().registerEvents(new FlashpaperListener(), this);
-
+    	getServer().getPluginManager().registerEvents(new CancelExpPickupListener(), this);
     }
     
     /**
