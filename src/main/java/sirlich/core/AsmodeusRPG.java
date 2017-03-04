@@ -1,14 +1,15 @@
 package sirlich.core;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
+import sirlich.events.ManaRegenEvent;
 import sirlich.listeners.CancelExpPickupListener;
 import sirlich.listeners.CancelSwitchHandEvent;
 import sirlich.listeners.FlashpaperListener;
 import sirlich.listeners.HandleRPGInventory;
+import sirlich.listeners.OnPlayerJoinListener;
 import sirlich.listeners.PlayerAttackListener;
 
 /**
@@ -29,7 +30,7 @@ public class AsmodeusRPG extends JavaPlugin{
     	registerCommands();
     	Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             public void run() {
-                    Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "This is an announcement!");
+            	ManaRegenEvent.run();
             }
     	}, 60, 100);
     }
@@ -52,6 +53,7 @@ public class AsmodeusRPG extends JavaPlugin{
     	getServer().getPluginManager().registerEvents(new CancelSwitchHandEvent(), this);
     	getServer().getPluginManager().registerEvents(new FlashpaperListener(), this);
     	getServer().getPluginManager().registerEvents(new CancelExpPickupListener(), this);
+    	getServer().getPluginManager().registerEvents(new OnPlayerJoinListener(), this);
     }
     
     /**
