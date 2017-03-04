@@ -6,6 +6,7 @@ import sirlich.commands.SpawnWeaponCommand;
 import sirlich.listeners.HandleRPGInventory;
 import sirlich.listeners.PlayerAttackListener;
 import sirlich.listeners.CancelSwitchHandEvent;
+import sirlich.listeners.FlashpaperListener;
 
 /**
  * This class is the "Heart of the beast". This is the main class that extends java plugin.
@@ -40,6 +41,8 @@ public class AsmodeusRPG extends JavaPlugin{
     	getServer().getPluginManager().registerEvents(new PlayerAttackListener(), this);
     	getServer().getPluginManager().registerEvents(new HandleRPGInventory(), this);
     	getServer().getPluginManager().registerEvents(new CancelSwitchHandEvent(), this);
+    	getServer().getPluginManager().registerEvents(new FlashpaperListener(), this);
+
     }
     
     /**
