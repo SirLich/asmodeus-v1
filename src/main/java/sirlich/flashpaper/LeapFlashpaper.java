@@ -2,7 +2,6 @@ package sirlich.flashpaper;
 
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-
 /**
  * Test flashpaper. This launches the players by Vector(1,1,1)
 **/
@@ -13,7 +12,7 @@ public class LeapFlashpaper implements Flashpaper{
 	}
 
 	public void use() {
-		this.p.setVelocity(new Vector(1,1,1));
+		this.p.setVelocity(new Vector(this.p.getLocation().getDirection().getX()*1.5,1,this.p.getLocation().getDirection().getZ()*1.5));
 	}
 
 	@Override

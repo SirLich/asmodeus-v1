@@ -1,13 +1,15 @@
 package sirlich.core;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
+import sirlich.listeners.CancelExpPickupListener;
+import sirlich.listeners.CancelSwitchHandEvent;
+import sirlich.listeners.FlashpaperListener;
 import sirlich.listeners.HandleRPGInventory;
 import sirlich.listeners.PlayerAttackListener;
-import sirlich.listeners.CancelSwitchHandEvent;
-import sirlich.listeners.CancelExpPickupListener;
-import sirlich.listeners.FlashpaperListener;
 
 /**
  * This class is the "Heart of the beast". This is the main class that extends java plugin.
@@ -25,6 +27,11 @@ public class AsmodeusRPG extends JavaPlugin{
     	instance = this;
     	registerListeners();
     	registerCommands();
+    	Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            public void run() {
+                    Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "This is an announcement!");
+            }
+    	}, 60, 100);
     }
     
     /**
