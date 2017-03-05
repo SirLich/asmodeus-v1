@@ -3,6 +3,8 @@ package sirlich.events;
 import java.util.ArrayList;
 import org.bukkit.entity.Player;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class ManaRegenEvent {
 	
 	private static ArrayList<Player> players = new ArrayList<Player>();
@@ -10,7 +12,7 @@ public class ManaRegenEvent {
 	private static ArrayList<Boolean> isTired = new ArrayList<Boolean>();
 	
 	//These will eventualy get set in a config file
-	public static final float EXHAUSTION_DRAIN = 0.01f;
+	public static final float EXHAUSTION_DRAIN = 0.02f;
 	public static final float EXHAUSTION_MAX = 1.0f;
 	
 	public static final float STAMINA_REGEN = 0.01f;
@@ -31,7 +33,7 @@ public class ManaRegenEvent {
 				if(isTired.get(i)){ //HES TIRED
 					tiredness.set(i, tiredness.get(i) - EXHAUSTION_DRAIN); //He is tired, so drain some tiredness away!
 					if(tiredness.get(i) < 0){ //HE WAS TIRED BUT HE NO LONGER IS
-						p.sendMessage("He was tired but he no longer is!");
+						p.sendMessage(ChatColor.LIGHT_PURPLE + "You are no longer exhausted");
 						p.setFoodLevel(20);
 						isTired.set(i, false); //Make him not tired
 						p.setExp(0.01f);
@@ -39,7 +41,7 @@ public class ManaRegenEvent {
 				}
 				else{//HES NOT TIRED
 					p.setFoodLevel(0);
-					p.sendMessage("He got tired. Aww!");
+					p.sendMessage(ChatColor.LIGHT_PURPLE + "You are exhausted");
 					isTired.set(i, true);
 					tiredness.set(i, 1.0f);
 				}

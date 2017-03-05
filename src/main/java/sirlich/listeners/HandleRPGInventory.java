@@ -67,9 +67,13 @@ public class HandleRPGInventory implements Listener{
 	**/
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
-		ItemStack clicked = event.getCurrentItem();
-		if(clicked.getType() == Material.NETHER_STAR){ //add other special item-cases eventualy
-			event.setCancelled(true);
+		if(event.getCurrentItem() == null){
+			return;
+		}else{
+			ItemStack clicked = event.getCurrentItem();
+			if(clicked.getType() == Material.NETHER_STAR){ //add other special item-cases eventualy
+				event.setCancelled(true);
+			}
 		}
 	}
 	
