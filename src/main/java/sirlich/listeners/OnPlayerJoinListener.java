@@ -11,5 +11,6 @@ public class OnPlayerJoinListener implements Listener{
 	@EventHandler
 	public void playerJoinEvent(PlayerJoinEvent event){
 		ManaRegenEvent.addPlayer((Player) event.getPlayer());
+		event.getPlayer().setExp(1.0f);
 	}
 }

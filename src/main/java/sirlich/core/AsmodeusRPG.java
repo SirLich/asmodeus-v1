@@ -32,7 +32,7 @@ public class AsmodeusRPG extends JavaPlugin{
             public void run() {
             	ManaRegenEvent.run();
             }
-    	}, 60, 100);
+    	}, 0, 1);
     }
     
     /**
