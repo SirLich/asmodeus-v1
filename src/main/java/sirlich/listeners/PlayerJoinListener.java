@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import sirlich.events.ManaRegenEvent;
 
-public class OnPlayerJoinListener implements Listener{
+public class PlayerJoinListener implements Listener{
 	@EventHandler
 	public void playerJoinEvent(PlayerJoinEvent event){
 		ManaRegenEvent.addPlayer((Player) event.getPlayer());

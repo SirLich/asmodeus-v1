@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
  * 
  * NOTE: Currently throwing an error when clicked outside of the inventory!
 **/
-public class HandleRPGInventory implements Listener{
+public class RPGInventoryListener implements Listener{
 	
 	/**
 	 * This method removes the OPEN_INVENTORY achievment. This is usefull

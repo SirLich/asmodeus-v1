@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerExpChangeEvent;
 /**
  * Simple listener to handle players picking up orbs. Players can no longer gain Exp from killing mobs etc.
 **/
-public class CancelExpPickupListener implements Listener{
+public class ExpPickupListener implements Listener{
 	@EventHandler
 	public void PlayerExpChangeEvent(PlayerExpChangeEvent event){
 		event.setAmount(0);

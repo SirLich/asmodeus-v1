@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
  * Generally speaking, we don't want to player to use their second hand,
  * so we cancel the event.
 **/
-public class CancelSwitchHandEvent implements Listener{
+public class SwitchHandListener implements Listener{
 	@EventHandler
 	public boolean PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event){
 		event.getPlayer().sendMessage("Yesp!");

@@ -5,11 +5,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
 import sirlich.events.ManaRegenEvent;
-import sirlich.listeners.CancelExpPickupListener;
-import sirlich.listeners.CancelSwitchHandEvent;
+import sirlich.listeners.ExpPickupListener;
+import sirlich.listeners.SwitchHandListener;
 import sirlich.listeners.FlashpaperListener;
-import sirlich.listeners.HandleRPGInventory;
-import sirlich.listeners.OnPlayerJoinListener;
+import sirlich.listeners.RPGInventoryListener;
+import sirlich.listeners.PlayerJoinListener;
 import sirlich.listeners.PlayerAttackListener;
 
 /**
@@ -49,11 +49,11 @@ public class AsmodeusRPG extends JavaPlugin{
     private void registerListeners(){
     	
     	getServer().getPluginManager().registerEvents(new PlayerAttackListener(), this);
-    	getServer().getPluginManager().registerEvents(new HandleRPGInventory(), this);
-    	getServer().getPluginManager().registerEvents(new CancelSwitchHandEvent(), this);
+    	getServer().getPluginManager().registerEvents(new RPGInventoryListener(), this);
+    	getServer().getPluginManager().registerEvents(new SwitchHandListener(), this);
     	getServer().getPluginManager().registerEvents(new FlashpaperListener(), this);
-    	getServer().getPluginManager().registerEvents(new CancelExpPickupListener(), this);
-    	getServer().getPluginManager().registerEvents(new OnPlayerJoinListener(), this);
+    	getServer().getPluginManager().registerEvents(new ExpPickupListener(), this);
+    	getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
     }
     
     /**
