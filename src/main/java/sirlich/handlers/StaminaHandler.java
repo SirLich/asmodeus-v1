@@ -1,11 +1,11 @@
-package sirlich.events;
+package sirlich.handlers;
 
 import java.util.ArrayList;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class ManaRegenEvent {
+public class StaminaHandler {
 	
 	private static ArrayList<Player> players = new ArrayList<Player>();
 	private static ArrayList<Float> tiredness = new ArrayList<Float>();

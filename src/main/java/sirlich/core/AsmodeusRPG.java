@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
-import sirlich.events.ManaRegenEvent;
+import sirlich.handlers.StaminaHandler;
 import sirlich.listeners.ExpPickupListener;
 import sirlich.listeners.SwitchHandListener;
 import sirlich.listeners.FlashpaperListener;
@@ -30,7 +30,7 @@ public class AsmodeusRPG extends JavaPlugin{
     	registerCommands();
     	Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             public void run() {
-            	ManaRegenEvent.run();
+            	StaminaHandler.run();
             }
     	}, 0, 1);
     }
