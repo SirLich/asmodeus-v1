@@ -52,6 +52,8 @@ public class HandleRPGInventory implements Listener{
 	 * This event handles the event of an item "dropping". I use this method
 	 * to cancel the drop of certain items such as NETHER_STARS, which would
 	 * otherwise spam the map.
+	 * 
+	 * TODO: Add the other items I need to drop.
 	**/
 	@EventHandler
     public void onItemSpawn(ItemSpawnEvent event) {
@@ -64,6 +66,8 @@ public class HandleRPGInventory implements Listener{
 	/**
 	 * Planned method to cancel certain inventory events to stop players
 	 * from messing with the RPG inventory.
+	 * 
+	 * TODO: Add the other items I need to cancel.
 	**/
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
@@ -76,32 +80,4 @@ public class HandleRPGInventory implements Listener{
 			}
 		}
 	}
-	
-	
-	/**
-	 * Currently not working class to handle the close of a players inventory.
-	 * We may not need this at all.
-	 * NOTE: Also contains code to handle schedulars. 
-	**/
-	/*
-	@EventHandler
-	public void onInventoryCloseEvent(InventoryCloseEvent event){
-    	Player p = (Player) event.getPlayer();
-		if(event.getInventory() instanceof PlayerInventory){
-			p.getOpenInventory().setItem(80, new ItemStack(Material.AIR));
-			p.getOpenInventory().setItem(81, new ItemStack(Material.AIR));
-			p.getOpenInventory().setItem(82, new ItemStack(Material.AIR));
-			p.getOpenInventory().setItem(83, new ItemStack(Material.AIR));
-
-		}
-		//This will be usefull for scheduling events later on
-		final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
-		Runnable task = new Runnable() {
-	        public void run() {
-	            event.getPlayer().openInventory(event.getPlayer().getInventory());
-	        }
-	    };
-	    worker.schedule(task, 1, TimeUnit.SECONDS);// We set the time delay here  
-	}
-	*/
 }

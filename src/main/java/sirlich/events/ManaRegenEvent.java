@@ -63,6 +63,9 @@ public class ManaRegenEvent {
 						p.setExp(1);
 					}
 				}
+				if(p.isSneaking()){
+					p.setExp(p.getExp() + STAMINA_REGEN); //Regenerate some stamina
+				}
 			}
 			else{ //Something went wrong
 				p.setExp(1f);
