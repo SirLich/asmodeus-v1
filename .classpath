@@ -32,12 +32,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/liam/Spigot/spigot.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="https://hub.spigotmc.org/javadocs/spigot/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/liam/Jars/Item-NBT-API.jar"/>
-	<classpathentry kind="lib" path="/home/liam/Downloads/mysql-connector-java-5.0.8.zip"/>
+	<classpathentry kind="lib" path="/home/liam/projects/spigot_server/spigot.jar"/>
+	<classpathentry kind="lib" path="/home/liam/extra/Jars/Item-NBT-API.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -15,7 +15,7 @@ import sirlich.flashpaper.LeapFlashpaper;
 public class FlashpaperListener implements Listener{
 	@EventHandler
 	public void FlashpaperEvent(PlayerInteractEvent event){
-		if((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) 
+		if(event.getItem() != null && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) 
 				&& event.getItem().getType() == Material.PAPER){
 			LeapFlashpaper flashpaper = new LeapFlashpaper((Player)event.getPlayer());
 			flashpaper.use();
