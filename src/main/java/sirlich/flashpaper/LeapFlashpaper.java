@@ -1,10 +1,13 @@
 package sirlich.flashpaper;
 
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import sirlich.core.AsmodeusRPG;
 
@@ -29,8 +32,22 @@ public class LeapFlashpaper implements Flashpaper{
                 	Bukkit.getWorld("world").playSound(snow.getLocation(), Sound.BLOCK_COMPARATOR_CLICK, 0.3f, 3f);
             	}
         		snow.remove();
+        		snow.setGravity(false);
             }
         }, 10);
+		new BukkitRunnable() {
+              public void run() {
+                  if(snow == null || !snow.hasGravity()){
+                	  cancel();
+                  }
+                  else{
+                	  p.sendMessage("Snowballs!");
+                	  Location parLoc = snow.getLocation();
+                	  Particle par = Particle.PORTAL;
+                	  Bukkit.getWorld("world").spawnParticle(par, parLoc, 5, 0.3, 0.2, 0.3);
+                  }
+              }
+        }.runTaskTimer(AsmodeusRPG.instance(), 0, 2);
 	}
 
 	@Override

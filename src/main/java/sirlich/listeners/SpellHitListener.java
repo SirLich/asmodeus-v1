@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.util.Vector;
 
+import sirlich.armour.ArmourUtils;
+
 public class SpellHitListener implements Listener{
 	@EventHandler
 	public void snowballHitEvent(ProjectileHitEvent e){
@@ -21,6 +23,7 @@ public class SpellHitListener implements Listener{
 			loc = e.getHitEntity().getLocation().add(new Vector(0,1,0));
         	Bukkit.getWorld("world").playSound(e.getEntity().getLocation(), Sound.BLOCK_NOTE_PLING, 0.3f, 3f);
 			par = Particle.SWEEP_ATTACK;
+			p.sendMessage(ArmourUtils.wearingSet(p));
 		}
 		else if(e.getHitBlock() != null){
 			loc = e.getHitBlock().getLocation().add(new Vector(0,1,0));
