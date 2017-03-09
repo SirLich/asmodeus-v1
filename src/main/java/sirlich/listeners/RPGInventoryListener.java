@@ -11,6 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerAchievementAwardedEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 /**
  * This class handles all sorts of inventory things.
  * I plan on using the players 2x2 crafting slot as a GUI,
@@ -58,9 +59,16 @@ public class RPGInventoryListener implements Listener{
 	@EventHandler
     public void onItemSpawn(ItemSpawnEvent event) {
 		boolean n = event.getEntity().getItemStack().getType() == Material.NETHER_STAR;
-		if(n == true){
+		boolean t = event.getEntity().getItemStack().getType() == Material.GOLD_SWORD;
+		if(n){
        		event.getEntity().remove();  
         }   
+		if(t){
+			event.getEntity().setGravity(false);
+			event.getEntity().setPickupDelay(2147483647);
+			event.getEntity().setInvulnerable(true);
+			event.getEntity().setVelocity(new Vector(0,0,0));
+		}
     }
 	
 	/**
