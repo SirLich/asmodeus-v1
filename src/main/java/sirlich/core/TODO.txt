@@ -1,0 +1,7 @@
+This text file will serve as something of a TODO for myself:
+	Dropped items:
+		Add better models
+		Make a runable that runs every five minutes, placing the correct item at the correct loc. This will requre configs.
+	Learn particles. 
+		Remove particles when it hits on ground
+	Wand system using diamond shovel?
