@@ -1,16 +1,19 @@
 package sirlich.core;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
 import sirlich.handlers.StaminaHandler;
 import sirlich.listeners.ExpPickupListener;
-import sirlich.listeners.SwitchHandListener;
 import sirlich.listeners.FlashpaperListener;
-import sirlich.listeners.RPGInventoryListener;
-import sirlich.listeners.PlayerJoinListener;
+import sirlich.listeners.LoseHungerListener;
 import sirlich.listeners.PlayerAttackListener;
+import sirlich.listeners.PlayerJoinListener;
+import sirlich.listeners.RPGInventoryListener;
+import sirlich.listeners.SpellHitListener;
+import sirlich.listeners.SwitchHandListener;
 
 /**
  * This class is the "Heart of the beast". This is the main class that extends java plugin.
@@ -33,6 +36,9 @@ public class AsmodeusRPG extends JavaPlugin{
             	StaminaHandler.run();
             }
     	}, 0, 1);
+    	for(Player p : Bukkit.getOnlinePlayers()){
+    		p.kickPlayer("Server reloading, please log-back on in a moment.");
+    	}
     }
     
     /**
@@ -47,13 +53,15 @@ public class AsmodeusRPG extends JavaPlugin{
      * This method registers all listeners. 
     **/
     private void registerListeners(){
-    	
     	getServer().getPluginManager().registerEvents(new PlayerAttackListener(), this);
     	getServer().getPluginManager().registerEvents(new RPGInventoryListener(), this);
     	getServer().getPluginManager().registerEvents(new SwitchHandListener(), this);
     	getServer().getPluginManager().registerEvents(new FlashpaperListener(), this);
     	getServer().getPluginManager().registerEvents(new ExpPickupListener(), this);
     	getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+    	getServer().getPluginManager().registerEvents(new LoseHungerListener(), this);
+    	getServer().getPluginManager().registerEvents(new SpellHitListener(), this);
+
     }
     
     /**

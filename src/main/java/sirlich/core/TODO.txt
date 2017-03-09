@@ -5,3 +5,8 @@ This text file will serve as something of a TODO for myself:
 	Learn particles. 
 		Remove particles when it hits on ground
 	Wand system using diamond shovel?
+	
+Better TODO:
+	Remove bad particles on the spells
+	Handle spell hitting the ground
+	Stop XP glitch where getting XP at max level boosts your level

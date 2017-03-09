@@ -1,0 +1,4 @@
+I will keep some notes to myself and for anyone who decompiles here:
+Notes on weps:
+	Wand:
+		All wands should be iron swords

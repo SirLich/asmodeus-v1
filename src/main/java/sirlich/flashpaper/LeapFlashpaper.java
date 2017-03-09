@@ -24,7 +24,6 @@ public class LeapFlashpaper implements Flashpaper{
 		snow.setVelocity(p.getEyeLocation().getDirection().multiply(1));
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AsmodeusRPG.instance(), new Runnable() {
             public void run() {
-                p.sendMessage("Hello!");
         		snow.remove();
             }
         }, 10);
