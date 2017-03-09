@@ -10,3 +10,7 @@ Better TODO:
 	Remove bad particles on the spells
 	Handle spell hitting the ground
 	Stop XP glitch where getting XP at max level boosts your level
+	Add particle train to spells
+	Model 3 wand types
+	Switch SpellHit into a damageEvent
+	Make a better DamageEvent that calls to other classes/methods

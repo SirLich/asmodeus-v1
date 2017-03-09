@@ -2,6 +2,7 @@ package sirlich.flashpaper;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 
@@ -24,6 +25,9 @@ public class LeapFlashpaper implements Flashpaper{
 		snow.setVelocity(p.getEyeLocation().getDirection().multiply(1));
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AsmodeusRPG.instance(), new Runnable() {
             public void run() {
+            	if(snow.hasGravity()){
+                	Bukkit.getWorld("world").playSound(snow.getLocation(), Sound.BLOCK_COMPARATOR_CLICK, 0.3f, 3f);
+            	}
         		snow.remove();
             }
         }, 10);
