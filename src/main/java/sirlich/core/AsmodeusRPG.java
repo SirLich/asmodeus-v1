@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
 import sirlich.handlers.StaminaHandler;
+import sirlich.listeners.DoubleJumpListener;
 import sirlich.listeners.ExpPickupListener;
 import sirlich.listeners.FlashpaperListener;
 import sirlich.listeners.LoseHungerListener;
@@ -61,7 +62,7 @@ public class AsmodeusRPG extends JavaPlugin{
     	getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
     	getServer().getPluginManager().registerEvents(new LoseHungerListener(), this);
     	getServer().getPluginManager().registerEvents(new SpellHitListener(), this);
-
+    	getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
     }
     
     /**

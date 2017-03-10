@@ -27,6 +27,7 @@ import net.md_5.bungee.api.ChatColor;
  * each one more custom.
 **/
 public class PlayerAttackListener implements Listener{
+	@SuppressWarnings("unused")
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent e){
 		if(e instanceof EntityDamageByEntityEvent){
@@ -48,11 +49,11 @@ public class PlayerAttackListener implements Listener{
             	 * Check if the item is a Weapon. 
             	**/
             	if(item.hasKey("damage")){
-            		if(!item.getBoolean("broken")){
+            		if(!item.getBoolean("broken") || true){
 	            		//sets damage -> This is the RAW damage. It sets the damage. Ignoring armour... potions... sword swing.
 	            		//This is good. This means we can implement our own damage system.
 	            		event.setDamage((double)item.getInteger("damage"));
-	            		
+	            		e.getEntity().setInvulnerable(false);
 	            		//Code that "Ghost weps" should have. Sets entity to invisi and outlines them for 0.1 seconds.
 	            		e.getEntity().setGlowing(true);
 	            		final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();

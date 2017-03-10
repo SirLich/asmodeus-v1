@@ -39,9 +39,9 @@ public class CustomWeapon{
 		boolean broken = false;
 		return makeWeapon(item, name, level, attackDamage, attackSpeed, weaponDurability, weaponDamage, broken);
 	}
-	public static ItemStack createWeapon(String type, int level){
-		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
-		String name = setName(type);
+	public static ItemStack createWeapon(String type, String species, int level){
+		ItemStack item = getSpecies(type);
+		String name = setName(type,species);
 		float attackDamage = level/2;
 		float attackSpeed = 16f;
 		int weaponDamage = setDmgValue(type);
@@ -50,16 +50,28 @@ public class CustomWeapon{
 		return makeWeapon(item, name, level, attackDamage, attackSpeed, weaponDurability, weaponDamage, broken);
 	}
 	
-	public static int setDmgValue(String name){
+	private static int setDmgValue(String name){
 		Map <String, Integer> m = new HashMap<String, Integer>();
 		m.put("classic_wand", 1);
 		return m.get(name);	
 	}
 	
-	private static String setName(String name){
+	private static String setName(String type,String species){
 		Map <String, String> m = new HashMap<String, String>();
+		m.put("wandfire", ChatColor.RED + "Wand of fire");
+		m.put("wandair", ChatColor.AQUA + "Wand of air");
+		m.put("wandwater", ChatColor.BLUE + "Wand of water");
 		m.put("classic_wand", "Classic wand");
-		return m.get(name);	
+		String temp = (type + species).toLowerCase();
+		return m.get(temp);	
+	}
+	private static ItemStack getSpecies(String type){
+		Map <String, ItemStack> m = new HashMap<String, ItemStack>();
+		m.put("wand",new ItemStack(Material.DIAMOND_SPADE));
+		m.put("sword",new ItemStack(Material.DIAMOND_SWORD));
+		m.put("sword",new ItemStack(Material.DIAMOND_AXE));
+		m.put("staff",new ItemStack(Material.DIAMOND_HOE));
+		return m.get(type.toLowerCase());	
 	}
 	
 	/**

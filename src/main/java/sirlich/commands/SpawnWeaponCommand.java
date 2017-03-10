@@ -16,15 +16,9 @@ public class SpawnWeaponCommand implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(sender instanceof Player){
 			Player p = (Player) sender;
-			if(args.length >= 2){
-				/*p.getInventory().addItem(sirlich.weapons.WeaponUtil.CustomSword(args[0],
-						args[1],
-						Integer.parseInt(args[2]),
-						Float.parseFloat(args[3]),
-						Float.parseFloat(args[4]),
-						args[5],
-						Integer.parseInt(args[6])));*/
-				p.getInventory().addItem(CustomWeapon.createWeapon(args[0],Integer.parseInt(args[1])));
+			if(args.length >= 3){
+				//p.getInventory().addItem(CustomWeapon.createWeapon(args[0],args[1],Integer.parseInt(args[2])));
+				p.getInventory().addItem(CustomWeapon.createWeapon());
 			}
 			else{
 				return false;

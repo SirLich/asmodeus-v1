@@ -12,5 +12,6 @@ public class PlayerJoinListener implements Listener{
 	public void playerJoinEvent(PlayerJoinEvent event){
 		StaminaHandler.addPlayer((Player) event.getPlayer());
 		event.getPlayer().setExp(1.0f);
+		event.getPlayer().setAllowFlight(true);
 	}
 }
