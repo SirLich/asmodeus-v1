@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
+import sirlich.commands.ToggleCommand;
 import sirlich.handlers.StaminaHandler;
 import sirlich.listeners.DoubleJumpListener;
 import sirlich.listeners.ExpPickupListener;
@@ -71,6 +72,7 @@ public class AsmodeusRPG extends JavaPlugin{
     private void registerCommands(){
     	this.getCommand("spawn").setExecutor(new SpawnWeaponCommand());
     	this.getCommand("spawnMob").setExecutor(new SpawnWeaponCommand());
+    	this.getCommand("spawnMob").setExecutor(new ToggleCommand());
     }
     
     /**

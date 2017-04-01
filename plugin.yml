@@ -10,3 +10,6 @@ commands:
   spawnMob:
     description: Nothing here!
     usage: NOPE!
+  toggle:
+    desciption: Use to toggle all kinds of toggleable things
+    usage: /toggle <toggleable item>
