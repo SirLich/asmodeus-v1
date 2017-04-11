@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
 import sirlich.commands.ToggleCommand;
+import sirlich.handlers.ArtifactHandler;
 import sirlich.handlers.StaminaHandler;
 import sirlich.listeners.DoubleJumpListener;
 import sirlich.listeners.ExpPickupListener;
@@ -15,7 +16,6 @@ import sirlich.listeners.PlayerAttackListener;
 import sirlich.listeners.PlayerJoinListener;
 import sirlich.listeners.RPGInventoryListener;
 import sirlich.listeners.SpellHitListener;
-import sirlich.listeners.SwitchHandListener;
 
 /**
  * This class is the "Heart of the beast". This is the main class that extends java plugin.
@@ -57,13 +57,14 @@ public class AsmodeusRPG extends JavaPlugin{
     private void registerListeners(){
     	getServer().getPluginManager().registerEvents(new PlayerAttackListener(), this);
     	getServer().getPluginManager().registerEvents(new RPGInventoryListener(), this);
-    	getServer().getPluginManager().registerEvents(new SwitchHandListener(), this);
     	getServer().getPluginManager().registerEvents(new FlashpaperListener(), this);
     	getServer().getPluginManager().registerEvents(new ExpPickupListener(), this);
     	getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
     	getServer().getPluginManager().registerEvents(new LoseHungerListener(), this);
     	getServer().getPluginManager().registerEvents(new SpellHitListener(), this);
     	getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
+    	getServer().getPluginManager().registerEvents(new ArtifactHandler(), this);
+
     }
     
     /**
@@ -72,7 +73,7 @@ public class AsmodeusRPG extends JavaPlugin{
     private void registerCommands(){
     	this.getCommand("spawn").setExecutor(new SpawnWeaponCommand());
     	this.getCommand("spawnMob").setExecutor(new SpawnWeaponCommand());
-    	this.getCommand("spawnMob").setExecutor(new ToggleCommand());
+    	this.getCommand("toggle").setExecutor(new ToggleCommand());
     }
     
     /**
