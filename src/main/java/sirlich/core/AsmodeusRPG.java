@@ -1,5 +1,7 @@
 package sirlich.core;
 
+import java.io.File;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -7,13 +9,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import sirlich.commands.SpawnWeaponCommand;
 import sirlich.commands.ToggleCommand;
 import sirlich.handlers.ArtifactHandler;
+import sirlich.handlers.PlayerJoinHandler;
 import sirlich.handlers.StaminaHandler;
 import sirlich.listeners.DoubleJumpListener;
 import sirlich.listeners.ExpPickupListener;
 import sirlich.listeners.FlashpaperListener;
 import sirlich.listeners.LoseHungerListener;
 import sirlich.listeners.PlayerAttackListener;
-import sirlich.listeners.PlayerJoinListener;
 import sirlich.listeners.RPGInventoryListener;
 import sirlich.listeners.SpellHitListener;
 
@@ -30,6 +32,12 @@ public class AsmodeusRPG extends JavaPlugin{
 	**/
     @Override
     public void onEnable() {
+    	if (!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
+            File dir = new File(getDataFolder().getPath() + "/players");
+            System.out.println(getDataFolder().getPath());
+            dir.mkdir();
+        }
     	instance = this;
     	registerListeners();
     	registerCommands();
@@ -59,7 +67,7 @@ public class AsmodeusRPG extends JavaPlugin{
     	getServer().getPluginManager().registerEvents(new RPGInventoryListener(), this);
     	getServer().getPluginManager().registerEvents(new FlashpaperListener(), this);
     	getServer().getPluginManager().registerEvents(new ExpPickupListener(), this);
-    	getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+    	getServer().getPluginManager().registerEvents(new PlayerJoinHandler(), this);
     	getServer().getPluginManager().registerEvents(new LoseHungerListener(), this);
     	getServer().getPluginManager().registerEvents(new SpellHitListener(), this);
     	getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
