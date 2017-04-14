@@ -38,6 +38,8 @@ public class AsmodeusRPG extends JavaPlugin{
             File dir = new File(getDataFolder().getPath() + "/players");
             System.out.println(getDataFolder().getPath());
             dir.mkdir();
+            File file = new File(getDataFolder().getPath() + "/players" + "/testfile");
+            instance.saveResource(getDataFolder().getPath() + "/players" + "/testfile", true);
         }
     	instance = this;
     	registerListeners();
