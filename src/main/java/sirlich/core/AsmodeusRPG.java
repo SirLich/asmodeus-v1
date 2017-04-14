@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
 import sirlich.commands.ToggleCommand;
+import sirlich.config.CreatePlayerConfig;
 import sirlich.handlers.ArtifactHandler;
 import sirlich.handlers.PlayerJoinHandler;
 import sirlich.handlers.StaminaHandler;
@@ -72,7 +73,7 @@ public class AsmodeusRPG extends JavaPlugin{
     	getServer().getPluginManager().registerEvents(new SpellHitListener(), this);
     	getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
     	getServer().getPluginManager().registerEvents(new ArtifactHandler(), this);
-
+    	getServer().getPluginManager().registerEvents(new CreatePlayerConfig(), this);
     }
     
     /**
