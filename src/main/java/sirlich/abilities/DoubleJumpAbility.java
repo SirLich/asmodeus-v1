@@ -2,7 +2,7 @@ package sirlich.abilities;
 
 import org.bukkit.entity.Player;
 
-import sirlich.messaging.MessageUtils;
+import sirlich.chat.ChatUtils;
 
 public class DoubleJumpAbility extends Ability{
 	public DoubleJumpAbility(Player p) {
@@ -12,6 +12,6 @@ public class DoubleJumpAbility extends Ability{
 	}
 	@Override
 	public void run(){
-		MessageUtils.infoMessage(player, "You tried to drop an item I see.");
+		ChatUtils.chatInfo(player, "You tried to drop an item I see.");
 	}
 }

@@ -5,11 +5,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import sirlich.messaging.MessageUtils;
+import sirlich.chat.ChatUtils;
 
 public class CreatePlayerConfig implements Listener{
 	@EventHandler
 	public void playerJoinEvent(PlayerJoinEvent event){
-		MessageUtils.infoMessage(event.getPlayer(),"A new player joined!");
+		ChatUtils.chatInfo(event.getPlayer(),"A new player joined!");
 	}
 }
