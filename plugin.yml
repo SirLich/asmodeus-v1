@@ -13,3 +13,6 @@ commands:
   toggle:
     desciption: Use to toggle all kinds of toggleable things
     usage: /toggle <toggleable item>
+  inv:
+    description: Open a blank 9 inventory
+    usage: /inv

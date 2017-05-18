@@ -8,10 +8,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
 import sirlich.commands.ToggleCommand;
+import sirlich.commands.openInvCmd;
 import sirlich.config.CreatePlayerConfig;
 import sirlich.handlers.ArtifactHandler;
 import sirlich.handlers.PlayerJoinHandler;
 import sirlich.handlers.StaminaHandler;
+import sirlich.inventory.INVAction;
+import sirlich.inventory.INVClickHandler;
+import sirlich.inventory.INVList;
 import sirlich.listeners.DoubleJumpListener;
 import sirlich.listeners.ExpPickupListener;
 import sirlich.listeners.FlashpaperListener;
@@ -38,12 +42,13 @@ public class AsmodeusRPG extends JavaPlugin{
             File dir = new File(getDataFolder().getPath() + "/players");
             System.out.println(getDataFolder().getPath());
             dir.mkdir();
-            File file = new File(getDataFolder().getPath() + "/players" + "/testfile");
+            //File file = new File(getDataFolder().getPath() + "/players" + "/testfile");
             instance.saveResource(getDataFolder().getPath() + "/players" + "/testfile", true);
         }
     	instance = this;
     	registerListeners();
     	registerCommands();
+    	registerButtons();
     	Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             public void run() {
             	StaminaHandler.run();
@@ -76,17 +81,26 @@ public class AsmodeusRPG extends JavaPlugin{
     	getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
     	getServer().getPluginManager().registerEvents(new ArtifactHandler(), this);
     	getServer().getPluginManager().registerEvents(new CreatePlayerConfig(), this);
+    	getServer().getPluginManager().registerEvents(new INVClickHandler(), this);
+
     }
     
     /**
      * This method registers all commands.
     **/
     private void registerCommands(){
+    	this.getCommand("inv").setExecutor(new openInvCmd());
     	this.getCommand("spawn").setExecutor(new SpawnWeaponCommand());
     	this.getCommand("spawnMob").setExecutor(new SpawnWeaponCommand());
     	this.getCommand("toggle").setExecutor(new ToggleCommand());
     }
     
+    /**
+     * This method registers all buttons.
+    **/
+    private void registerButtons(){
+    	INVList.addAction("example", new INVAction());
+    }
     /**
      * This method returns an instance of the main plugin for use in other .java files.
     **/

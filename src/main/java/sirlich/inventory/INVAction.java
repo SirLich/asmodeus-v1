@@ -6,6 +6,6 @@ import sirlich.chat.ChatUtils;
 
 public class INVAction {
 	public void run(Player p){
-		ChatUtils.chatInfo(p,"Looks like you clicked an item!");
+		ChatUtils.chatInfo(p, "This is the default inventoryClick return");
 	}
 }

@@ -16,6 +16,7 @@ public class PlayerJoinHandler implements Listener{
 		event.getPlayer().setExp(1.0f);
 		event.getPlayer().setGameMode(GameMode.SURVIVAL);
 		event.getPlayer().setAllowFlight(true);
+		event.getPlayer().setNoDamageTicks(0);
 		//saveResource("special.yml", false);
 	}
 }
