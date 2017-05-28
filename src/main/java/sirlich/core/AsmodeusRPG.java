@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import sirlich.commands.SpawnWeaponCommand;
 import sirlich.commands.ToggleCommand;
+import sirlich.commands.createMobCommand;
 import sirlich.commands.openInvCmd;
 import sirlich.config.CreatePlayerConfig;
 import sirlich.handlers.ArtifactHandler;
@@ -90,6 +91,7 @@ public class AsmodeusRPG extends JavaPlugin{
     **/
     private void registerCommands(){
     	this.getCommand("inv").setExecutor(new openInvCmd());
+    	this.getCommand("create").setExecutor(new createMobCommand());
     	this.getCommand("spawn").setExecutor(new SpawnWeaponCommand());
     	this.getCommand("spawnMob").setExecutor(new SpawnWeaponCommand());
     	this.getCommand("toggle").setExecutor(new ToggleCommand());

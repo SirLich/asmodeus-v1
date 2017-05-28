@@ -1,5 +1,5 @@
 name: AsmodeusRPG
-version: 0.0.1
+version: 0.0.2
 main: sirlich.core.AsmodeusRPG
 author: SirLich
 description: RPG plugin testing
@@ -16,3 +16,6 @@ commands:
   inv:
     description: Open a blank 9 inventory
     usage: /inv
+  create:
+    description: Create a mob
+    usage: /create
